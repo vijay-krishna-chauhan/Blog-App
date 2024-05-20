@@ -3,12 +3,13 @@ const Post=require("../models/Post");
 exports.getPosts= async (req, res)=>{
     try{
         
-        const posts=await Post.find({});
+        const posts=await Post.find().find().populate("likes").populate("comments").exec();
         res.status(200).json(
             {
-                success: true,
-                data:posts,
-                message:"Posts fetched successfully"
+                posts,
+                // success: true,
+                // data:posts,
+                // message:"Posts fetched successfully"
             }
         );
     }

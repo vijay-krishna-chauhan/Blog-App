@@ -1,15 +1,13 @@
 const Post=require("../models/Post");
 exports.postController= async (req, res)=>{
     try{
-        const {title, body}=req.body;
-        const response=await Post.create({title, body});
-        res.status(200).json(
-            {
-                success: true,
-                data:response,
-                message: "Post is successful"
-            }
-        );
+        const {title, body} = req.body;
+        const post = new Post({title, body });
+        const savedPost = await post.save();
+
+        res.json({
+            post : savedPost
+        })
     }
     catch(err){
         console.log(err);
